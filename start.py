@@ -10,27 +10,24 @@ messages = [
 ]
 
 class AnalizadorDeSentimientos:
-    def analizar_sentimiento(self, polaridad):
-        if polaridad > -0.6 and polaridad <= -0.3:
+    @staticmethod
+    def analizar_sentimiento(self, polarity):
+        if polarity > -0.6 and polarity <= -0.3:
             return "\x1b[1;31m"+'negativo'+"\x1b[0;37m"
-        elif polaridad > -0.3 and polaridad < 0:
+        elif polarity > -0.3 and polarity < 0:
             return "\x1b[1;31m"+'algo negativo'+"\x1b[0;37m"
-        elif polaridad == 0:
+        elif polarity == 0:
             return "\x1b[1;33m"+'neutral'+"\x1b[0;37m"
-        elif polaridad > 0 and polaridad <= 0.3:
+        elif polarity > 0 and polarity <= 0.3:
             return "\x1b[1;33m"+'algo positivo'
-        elif polaridad > 0.3 and polaridad <= 0.6:
+        elif polarity > 0.3 and polarity <= 0.6:
             return "\x1b[1;32m"+'positivo'
-        elif polaridad > 0.6 and polaridad <= 0.9:
+        elif polarity > 0.6 and polarity <= 0.9:
             return "\x1b[1;32m"+'muy positivo'
-        elif polaridad > 0.9 and polaridad <= 1:
+        elif polarity > 0.9 and polarity <= 1:
             return "\x1b[1;32m"+'muy muy positivo'
-        else :
+        else:
             return "\x1b[1;31m"+'muy negativo'+"\x1b[0;37m"
-
-
-analizador = AnalizadorDeSentimientos()
-
 
 while True:
     
@@ -49,8 +46,9 @@ while True:
         "content": completion.choices[0].message['content']
     })
     
-    sentimiento = analizador.analizar_sentimiento(float(completion.choices[0].message['content']))
+    sentimiento = AnalizadorDeSentimientos.analizar_sentimiento(float(completion.choices[0].message['content']))
 
     print(sentimiento)
 
     
+
