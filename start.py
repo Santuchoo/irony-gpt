@@ -9,9 +9,9 @@ messages = [
     {"role": "system", "content": initialPrompt}
 ]
 
-class AnalizadorDeSentimientos:
+class SentimentAnalyzer:
     @staticmethod
-    def analizar_sentimiento(self, polarity):
+    def analize_sentiment(self, polarity):
         if polarity > -0.6 and polarity <= -0.3:
             return "\x1b[1;31m"+'negativo'+"\x1b[0;37m"
         elif polarity > -0.3 and polarity < 0:
@@ -46,9 +46,10 @@ while True:
         "content": completion.choices[0].message['content']
     })
     
-    sentimiento = AnalizadorDeSentimientos.analizar_sentimiento(float(completion.choices[0].message['content']))
+    sentimiento = SentimentAnalyzer.analize_sentiment(float(completion.choices[0].message['content']))
 
     print(sentimiento)
 
     
+
 
